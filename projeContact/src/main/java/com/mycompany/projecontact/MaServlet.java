@@ -10,12 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/test")
+@WebServlet(name = "MaServlet", urlPatterns = {"/Ma_Servlet"})
 public class MaServlet extends HttpServlet {
     private List<Contacts> contacts = new ArrayList<>();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         String action = request.getParameter("action");
+        if ("delete".equals(action)) {
+            String nom = request.getParameter("nom");
+            deleteContact(nom);
+        }
         request.setAttribute("contacts", contacts);
         request.getRequestDispatcher("contact.jsp").forward(request, response);
     }
@@ -47,4 +52,12 @@ public class MaServlet extends HttpServlet {
         // Rediriger vers la page JSP
         request.getRequestDispatcher("contact.jsp").forward(request, response);
     }
+    private void deleteContact(String nom) {
+    for (int i = 0; i < contacts.size(); i++) {
+        if (contacts.get(i).getNom().equals(nom)) {
+            contacts.remove(i);
+            break;
+        }
+    }
+}
 }

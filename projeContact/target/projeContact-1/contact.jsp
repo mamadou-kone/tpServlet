@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -14,7 +15,7 @@
     </header>
     <section>
         <article>
-            <form action="test" method="post">
+            <form action="Ma_Servlet" method="post">
                 <fieldset>
                     <legend>Nouvelle Personne</legend>
                     <label>Nom</label>
@@ -61,7 +62,16 @@
                         <td>${cont.telephone}</td>
                         <td>${cont.email}</td>
                         <td>${cont.competence}</td>
+                        
+                        <td>
+                    <form action="Ma_Servlet" method="get">
+                           <input type="hidden" name="action" value="delete">
+                           <input type="hidden" name="nom" value="${cont.nom}">
+                           <input type="submit" value="Supprimer" class="sup">
+                       </form>
+                   </td>
                     </tr>
+                    
                 </c:forEach>
             </table>
         </aside>
